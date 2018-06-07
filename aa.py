@@ -1,26 +1,8 @@
 from tkinter import *
-
-class App:
-
-    def __init__(self, master):
-
-        frame = Frame(master)
-        frame.pack()
-
-        self.button = Button(
-            frame, text="QUIT", fg="red", command=frame.quit
-            )
-        self.button.pack(side=LEFT)
-
-        self.hi_there = Button(frame, text="Hello", command=self.say_hi)
-        self.hi_there.pack(side=LEFT)
-
-    def say_hi(self):
-        print ("hi there, everyone!")
-
 root = Tk()
-
-app = App(root)
+canvas = Canvas(root,width=200,height=200,bg="white")
+canvas.grid()
+firstRect = canvas.create_rectangle(0,0,10,10,fill="red")
+secondRect = canvas.create_rectangle(5,5,15,15,fill="blue")
 
 root.mainloop()
-root.destroy() # optional; see description below

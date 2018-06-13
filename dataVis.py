@@ -28,6 +28,23 @@ class DataStructures:
 
         self.fill=0
 
+        menu = Menu(self.master)
+        self.master.config(menu=menu)
+        filemenu = Menu(menu)
+        menu.add_cascade(label="File", menu=filemenu)
+        filemenu.add_command(label="New", command=self.homePage)
+        filemenu.add_separator()
+        filemenu.add_command(label="Exit", command=root.quit)
+
+        helpmenu = Menu(menu)
+        menu.add_cascade(label="Help", menu=helpmenu)
+        helpmenu.add_command(label="About...", command=self.About)
+
+    def About(self):
+        pass
+
+
+
 
 
     def homePage(self):
@@ -40,6 +57,7 @@ class DataStructures:
 
         canvas = Canvas(self.frame, width=400, height=250)
         canvas.pack()
+
 
 
         self.stackframe.grid_forget()
@@ -98,6 +116,7 @@ class DataStructures:
             self.fill=0
             messagebox.showerror("Error", "The stack is empty")
         else:
+            self.canvasStack.delete(self.labelID)
             delY=self.StackY2-self.StackY1
 
             newCoordinateY1 = 0.2 * (self.fill)
@@ -107,6 +126,9 @@ class DataStructures:
             print (self.fill)
             self.canvasStack.create_rectangle(self.StackX1,   self.StackY1+(1-newCoordinateY1)*delY, self.StackX2,
                                               self.StackY1 + (1 - newCoordinateY2) * delY, fill="white")
+            self.labelID = self.canvasStack.create_text((self.QueueX1 + self.QueueX2) / 2 - 35,
+                                                        self.StackY1 + (1 - newCoordinateY2) * delY + 10,
+                                                        text="sp", font=('Arial', '12', 'bold'))
 
 
 
@@ -115,6 +137,7 @@ class DataStructures:
         print("StackPop operation to be shown")
 
     def StackPush(self):
+
         self.fillk = 0
         self.fill += 1
         print(self.fill)
@@ -131,6 +154,9 @@ class DataStructures:
             newCoordinateY1 = 0.2 * (self.fill)
             self.canvasStack.create_rectangle(self.StackX1,self.StackY1+(1-newCoordinateY1)*delY, self.StackX2,
                                              self.StackY2, fill="blue")
+            self.labelID = self.canvasStack.create_text((self.QueueX1 + self.QueueX2) / 2-35,
+                                                        self.StackY1 + (1 - newCoordinateY1) * delY+10,
+                                                        text="sp", font=('Arial', '12', 'bold'))
 
     def QueuePOP(self):
         print("QueuePop operation to be shown")

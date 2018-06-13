@@ -19,11 +19,12 @@ class DataStructures:
         self.StackX1 = 25
         self.StackY2 = 200
         self.StackY1 = 100
-
         self.QueueX1 = 50
         self.QueueX2 = 150
         self.QueueY1 = 80
         self.QueueY2 = 150
+        self.labelID=0
+        self.fillk = 0
 
         self.fill=0
 
@@ -73,7 +74,6 @@ class DataStructures:
 
         print(self.StackX1, self.StackY1, self.StackX2, self.StackY2)
         print ("Slack sellected")
-        # populate frame queue
 
         self.stackframe.grid()
 
@@ -115,6 +115,7 @@ class DataStructures:
         print("StackPop operation to be shown")
 
     def StackPush(self):
+        self.fillk = 0
         self.fill += 1
         print(self.fill)
         print("StackPush operation to be shown")
@@ -134,34 +135,54 @@ class DataStructures:
     def QueuePOP(self):
         print("QueuePop operation to be shown")
         if self.fill<=0:
-            messagebox.showerror("Error", "The stack is empty")
+            messagebox.showerror("Error", "The queue is empty")
+
+
+
         else:
+            self.canvasQueue.delete(self.labelID)
             delX = self.QueueX2 - self.QueueX1
 
             newCoordinateX1 = 0.2 * (self.fill)
 
-            newCoordinateX2 = 0.2 * (self.fill - 1)
 
             print(self.fill)
-            self.canvasQueue.create_rectangle(self.QueueX1+ (1 - newCoordinateX1) * delX, self.QueueY1 , self.QueueX2+ (1 - newCoordinateX2) * delX,
-                                              self.QueueX1 , fill="white")
+            self.canvasQueue.create_rectangle(self.QueueX2 -(0.2*(self.fillk+1))* delX, self.QueueY1 ,
+                                              self.QueueX2 -( 0.2 * (self.fillk ))*delX,
+                                              self.QueueY2 , fill="white")
+            #self.labelID=self.canvasQueue.create_text(self.QueueX2- (1 - newCoordinateX1) * delX,self.QueueY1,text="sp")
+            self.fillk += 1
+            self.labelID = self.canvasQueue.create_text(self.QueueX2 -(0.2*(self.fillk+1))* delX + 10,
+                                                        (self.QueueY1 + self.QueueY2) / 2,
+                                                        text="sp",font = ('Arial', '12','bold'))
 
 
         self.fill-=1
 
     def QueuePush(self):
+        self.fillk = 0
         self.fill+=1
         print("QueuePush operation to be shown")
         if self.fill >=6:
-            self.fill=6
+            self.fill=5
             messagebox.showerror("Error","The queue  is full")
 
         else:
+
             delX = self.QueueX2 - self.QueueX1
 
             newCoordinateX1 = 0.2 * (self.fill)
+
+
+
+
             self.canvasQueue.create_rectangle(self.QueueX1+(1-newCoordinateX1)*delX,self.QueueY1, self.QueueX2,
                                              self.QueueY2, fill="blue")
+
+            self.labelID = self.canvasQueue.create_text(self.QueueX2 - 10,
+                                                        (self.QueueY1 + self.QueueY2) / 2,
+                                                        text="sp",font = ('Arial', '12','bold'))
+
 
 
 
